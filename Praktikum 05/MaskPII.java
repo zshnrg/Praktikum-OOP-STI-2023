@@ -5,14 +5,15 @@ public class MaskPII {
     }
 
     private String maskPhoneNumber(String phoneNumber) {
-            if (phoneNumber.length() == 12 ) {
-                return "***-***-" + phoneNumber.substring(8, 12);
-            } else if (phoneNumber.length() == 15 ) {
-                return "+*-***-***-" + phoneNumber.substring(11, 15);
-            } else if (phoneNumber.length() == 16 ) {
-                return "+**-***-***-" + phoneNumber.substring(12, 16);
+        phoneNumber = removeSeparator(phoneNumber);
+            if (phoneNumber.length() == 10 ) {
+                return "***-***-" + phoneNumber.substring(6, 10);
+            } else if (phoneNumber.length() == 11 ) {
+                return "+*-***-***-" + phoneNumber.substring(7, 11);
+            } else if (phoneNumber.length() == 12 ) {
+                return "+**-***-***-" + phoneNumber.substring(8, 12);
             } else {
-                return "+***-***-***-" + phoneNumber.substring(13, 17);
+                return "+***-***-***-" + phoneNumber.substring(9, 13);
             }
     }
 
@@ -26,5 +27,22 @@ public class MaskPII {
         } else {
             return maskPhoneNumber(pii);
         }
+    }
+
+    private String removeSeparator(String phoneNumber) {
+        StringBuilder phone = new StringBuilder(phoneNumber);
+        while (isHasSeparator(phone) != -1) {
+            phone.deleteCharAt(isHasSeparator(phone));
+        }
+        return new String(phone);
+    }
+
+    private int isHasSeparator(StringBuilder phoneNumber) {
+        if (phoneNumber.indexOf("+") != -1) return phoneNumber.indexOf("+");
+        if (phoneNumber.indexOf("-") != -1) return phoneNumber.indexOf("-");
+        if (phoneNumber.indexOf("(") != -1) return phoneNumber.indexOf("(");
+        if (phoneNumber.indexOf(")") != -1) return phoneNumber.indexOf(")");
+        if (phoneNumber.indexOf(" ") != -1) return phoneNumber.indexOf(" ");
+        return -1;
     }
 }
