@@ -65,6 +65,7 @@ public class WordProcessor {
      *          false jika kata pada index tertentu bukan palindrome atau index tidak valid
      */
     public static boolean isPalindrome(int indeks) {
+        if (indeks >= words.size()) return false;
         StringBuilder reverse = reverseWord(indeks);
         String rev = new String(reverse).toLowerCase();
         return rev.equals(words.get(indeks).toLowerCase());
