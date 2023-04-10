@@ -10,10 +10,11 @@ public class MultithreadArraySumDriver {
 
        MultithreadArraySum arraySum = new MultithreadArraySum(nWorkers, arr);
 
-       int expectedArraySum = 15;
+       int expectedArraySum = 0;
+         for (int i = 0; i < arr.length; i++) {
+            expectedArraySum += arr[i];
+         }
        int actualArraySum = arraySum.calculateSum();
-
-       
 
        System.out.println(expectedArraySum + " " + actualArraySum);
     }
