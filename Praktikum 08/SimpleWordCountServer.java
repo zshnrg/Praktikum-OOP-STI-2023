@@ -13,9 +13,9 @@ public class SimpleWordCountServer extends Thread{
     public Integer[] processRequests(String[] requests) {
         Integer[] count = new Integer[requests.length];
 
-        for (int i = 0; i <= requests.length / nWorker; i++) {
+        for (int i = requests.length; i > 0; i -= nWorker) {
             for (int j = 0; j < nWorker; j++) {
-                int loc = i * nWorker + j;
+                int loc = requests.length - i + j;
                 threads[j] = new Thread(new Runnable() {
                     public void run() {
                         try{
