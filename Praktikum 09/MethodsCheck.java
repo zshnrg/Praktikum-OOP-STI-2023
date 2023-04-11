@@ -1,6 +1,6 @@
 import java.lang.reflect.Method;
 
-public class Metot {
+public class MethodsCheck {
     public static void main(String[] args) {
         printMethods("java.util.Map");
     }
