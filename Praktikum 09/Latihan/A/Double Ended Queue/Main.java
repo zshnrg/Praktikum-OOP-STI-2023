@@ -6,38 +6,42 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Deque<Integer> deque = new ArrayDeque<Integer>();
+        boolean isReverse = false;
 
         int q = sc.nextInt();
         sc.nextLine();
         while (--q >= 0) {
-            String[] op = sc.nextLine().split(" ");
-            switch (op[0]) {
+            String op = sc.next();
+            int x;
+            switch (op) {
                 case "addFirst":
-                    deque.addFirst(Integer.parseInt(op[1]));
+                    x = sc.nextInt();
+                    if (!isReverse) deque.addFirst(x);
+                    else deque.addLast(x);
                     break;
                 case "addLast":
-                    deque.addLast(Integer.parseInt(op[1]));
+                    x = sc.nextInt();
+                    if (!isReverse) deque.addLast(x);
+                    else deque.addFirst(x);
                     break;
                 case "pollFirst":
                     if (deque.isEmpty()) {
                         System.out.println("EMPTY");
                     } else {
-                        System.out.println(deque.pollFirst());
+                        if (!isReverse) System.out.println(deque.pollFirst());
+                        else System.out.println(deque.pollLast());
                     }
                     break;
                 case "pollLast":
                     if (deque.isEmpty()) {
                         System.out.println("EMPTY");
                     } else {
-                        System.out.println(deque.pollLast());
+                        if (!isReverse) System.out.println(deque.pollLast());
+                        else System.out.println(deque.pollFirst());
                     }
                     break;
                 case "reverse":
-                    Deque<Integer> temp = new ArrayDeque<Integer>();
-                    while (!deque.isEmpty()) {
-                        temp.addFirst(deque.pollFirst());
-                    }
-                    deque = temp;
+                    isReverse = !isReverse;
                     break;
             }
         }
